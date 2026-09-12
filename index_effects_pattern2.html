@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>企鵝 × 化石 解說秀｜演出版字幕</title>
+<style>
+:root{--sand:#d6b06a;--ice:#dff6ff;--ink:#07131d;}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Hiragino Sans","Yu Gothic",sans-serif}
+body{
+ min-height:100svh;color:#fff;overflow:hidden;
+ background:
+ radial-gradient(circle at 15% 10%,rgba(61,169,219,.24),transparent 32%),
+ radial-gradient(circle at 86% 82%,rgba(214,176,106,.16),transparent 30%),
+ linear-gradient(155deg,#061522 0%,#0b2b3d 48%,#091b27 100%);
+ padding:max(18px,env(safe-area-inset-top)) 18px max(18px,env(safe-area-inset-bottom));
+}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.22;background-image:radial-gradient(circle,rgba(255,255,255,.65) 0 1px,transparent 1.4px);background-size:30px 30px;mask-image:linear-gradient(to bottom,transparent,#000 25%,#000 80%,transparent)}
+.shell{min-height:calc(100svh - 36px);display:flex;flex-direction:column;max-width:1050px;margin:auto;position:relative;z-index:3}
+.top{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:8px 5px;color:rgba(255,255,255,.74);font-size:12px;letter-spacing:.08em}
+.brand{font-weight:800;color:var(--sand)} .status{display:flex;align-items:center;gap:7px}
+.dot{width:8px;height:8px;border-radius:50%;background:#7ae582;box-shadow:0 0 12px rgba(122,229,130,.6)}
+.card{flex:1;display:grid;place-items:center;padding:22px 0}
+.panel{width:100%;background:linear-gradient(180deg,rgba(5,18,28,.76),rgba(7,19,29,.9));border:1px solid rgba(214,176,106,.28);border-radius:28px;padding:clamp(28px,6vw,64px) clamp(22px,6vw,70px);box-shadow:0 25px 80px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,255,255,.05);backdrop-filter:blur(12px);transition:transform .25s,filter .25s}
+.kicker{text-align:center;color:var(--sand);font-size:12px;font-weight:800;letter-spacing:.18em;margin-bottom:22px}
+#zh{font-size:clamp(32px,7vw,72px);line-height:1.38;font-weight:850;text-align:center;letter-spacing:.02em;text-wrap:balance;min-height:2.8em;display:grid;place-items:center;text-shadow:0 4px 28px rgba(0,0,0,.35)}
+.rule{width:70px;height:2px;background:linear-gradient(90deg,transparent,var(--sand),transparent);margin:22px auto 16px}
+#jp{font-size:clamp(14px,2.3vw,24px);line-height:1.65;text-align:center;color:rgba(255,255,255,.68);font-weight:600;text-wrap:balance;min-height:2.8em;display:grid;place-items:center}
+.foot{text-align:center;color:rgba(255,255,255,.35);font-size:11px;padding:4px 0 2px}
+
+/* 演出レイヤー */
+#fx{position:fixed;inset:0;pointer-events:none;z-index:2;overflow:hidden}
+.flash{position:absolute;inset:0;background:white;opacity:0}
+.flash.go{animation:flash .65s ease-out}
+@keyframes flash{0%{opacity:.95} 100%{opacity:0}}
+.vignette{position:absolute;inset:0;opacity:0;background:radial-gradient(circle at center,transparent 30%,rgba(0,0,0,.82) 100%)}
+.vignette.go{animation:vignette 2.1s ease}
+@keyframes vignette{0%{opacity:0}25%{opacity:.8}100%{opacity:0}}
+.dino{position:absolute;left:-42vw;bottom:8vh;width:42vw;max-width:470px;opacity:0;filter:drop-shadow(0 20px 25px rgba(0,0,0,.6))}
+.dino.go{animation:dinoWalk 5s cubic-bezier(.15,.7,.25,1) forwards}
+@keyframes dinoWalk{0%{left:-42vw;opacity:0;transform:scale(.5) rotate(-2deg)}10%{opacity:.95}55%{transform:scale(.85) rotate(1deg)}100%{left:110vw;opacity:.2;transform:scale(1.35) rotate(-1deg)}}
+.water{position:absolute;inset:0;opacity:0;background:repeating-radial-gradient(ellipse at 50% 110%,rgba(80,190,230,.22) 0 2px,transparent 3px 26px)}
+.water.go{animation:water 3.2s ease}
+@keyframes water{0%{opacity:0;transform:scale(.8)}30%{opacity:1}100%{opacity:0;transform:scale(1.5)}}
+.ammonite{position:absolute;left:50%;top:50%;width:min(48vw,420px);aspect-ratio:1;border:10px solid rgba(226,190,120,.92);border-radius:50%;opacity:0;transform:translate(-50%,-50%) scale(.2)}
+.ammonite:before{content:"";position:absolute;inset:14%;border:9px solid rgba(226,190,120,.82);border-radius:50%}
+.ammonite:after{content:"";position:absolute;inset:31%;border:8px solid rgba(226,190,120,.7);border-radius:50%}
+.ammonite.go{animation:ammo 2.6s ease}
+@keyframes ammo{0%{opacity:0;transform:translate(-50%,-50%) scale(.15) rotate(-80deg)}25%{opacity:.9}100%{opacity:0;transform:translate(-50%,-50%) scale(1.25) rotate(45deg)}}
+.burst{position:absolute;inset:0;opacity:0;background:radial-gradient(circle at center,rgba(255,213,105,.85),rgba(255,180,50,.18) 22%,transparent 58%)}
+.burst.go{animation:burst 1.7s ease-out}
+@keyframes burst{0%{opacity:0;transform:scale(.4)}25%{opacity:1}100%{opacity:0;transform:scale(1.4)}}
+.stamp{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-7deg) scale(.2);border:8px solid #e4bd72;border-radius:18px;padding:18px 28px;font-size:clamp(24px,7vw,74px);font-weight:1000;color:#f4d797;text-shadow:0 5px 20px #000;opacity:0;letter-spacing:.08em;white-space:nowrap}
+.stamp.go{animation:stamp 1.7s cubic-bezier(.2,.85,.3,1.2)}
+@keyframes stamp{0%{opacity:0;transform:translate(-50%,-50%) rotate(-12deg) scale(.2)}35%{opacity:1;transform:translate(-50%,-50%) rotate(-7deg) scale(1.08)}100%{opacity:0;transform:translate(-50%,-50%) rotate(-7deg) scale(.94)}}
+body.shake .shell{animation:shake .52s linear}
+@keyframes shake{0%,100%{transform:translate(0)}15%{transform:translate(-10px,7px)}30%{transform:translate(9px,-5px)}45%{transform:translate(-7px,-2px)}60%{transform:translate(8px,5px)}80%{transform:translate(-4px,2px)}}
+
+/* 最初の1タップで音響を有効化 */
+#enable{position:fixed;inset:0;z-index:20;display:grid;place-items:center;background:rgba(2,10,16,.82);backdrop-filter:blur(10px)}
+#enable button{border:1px solid rgba(214,176,106,.5);background:linear-gradient(145deg,#18384b,#0c2331);color:white;border-radius:22px;padding:20px 28px;font-size:18px;font-weight:900;box-shadow:0 18px 60px rgba(0,0,0,.4)}
+#enable small{display:block;color:#c8d9e2;font-weight:500;margin-top:7px}
+</style>
+</head>
+<body>
+<div id="enable"><button id="enableBtn">演出字幕を開始<small>タップすると効果音も有効になります</small></button></div>
+
+<div id="fx">
+  <div class="flash" id="flash"></div>
+  <div class="vignette" id="vignette"></div>
+  <div class="water" id="water"></div>
+  <div class="ammonite" id="ammonite"></div>
+  <div class="burst" id="burst"></div>
+  <div class="stamp" id="stamp">70,000,000 YEARS AGO</div>
+  <svg class="dino" id="dino" viewBox="0 0 800 450" aria-hidden="true">
+    <path fill="#061014" d="M734 213c-24-9-56-10-92-3-42-38-89-60-140-67-76-11-132 8-183 48-38 30-67 70-83 111l-77 21-84 54 106-21 79 14c28 24 72 39 130 39 45 0 83-10 115-27l47 31-23-48c24-20 42-47 54-81 35 1 67-7 95-24 32-20 48-42 56-67zm-432 85 31-52 29 8-14 71-46-27zm206 68 25 60 38 1-28-79-35 18z"/>
+    <circle cx="660" cy="217" r="7" fill="#d6b06a"/>
+  </svg>
+</div>
+
+<div class="shell">
+  <div class="top"><div class="brand">DMM KARIYUSHI AQUARIUM</div><div class="status"><span class="dot"></span><span id="status">Connecting</span></div></div>
+  <div class="card"><section class="panel"><div class="kicker">PENGUIN × FOSSIL EXPLORATION</div><div id="zh">連線中…</div><div class="rule"></div><div id="jp">接続しています…</div></section></div>
+  <div class="foot">繁體中文 / 日本語　｜　SHOW EFFECTS MODE</div>
+</div>
+
+<script>
+const cues=[{"jp": "みなさーん！こんにちは！", "zh": "大家～～好！"}, {"jp": "まもなくこちら『うみかじドーム前』にてペンギンの解説イベントが始まります！ぜひこちらまでお集まりください！", "zh": "再過幾分鐘，企鵝解說活動就要開始囉！活動就在前面的『海風圓頂劇場（Umikaji Dome）』舉行，歡迎大家一起過來看看！"}, {"jp": "本日はDMMかりゆし水族館にお越しいただき誠にありがとうございます。調査員です。よろしくお願いします！", "zh": "今天非常感謝大家來到 DMM Kariyushi 水族館！我是調查員，請大家多多指教！"}, {"jp": "実は僕……さっきまで発掘現場で調査してたんですけど……", "zh": "其實我啊……剛剛都還在發掘現場進行調查……"}, {"jp": "みんなとお話ししたくて、こっそり抜け出してきちゃいました！", "zh": "可是我太想跟大家聊聊天了，所以就偷偷溜出來啦！"}, {"jp": "リーダーには……内緒にしてくださいね？", "zh": "這件事……要幫我對隊長保密喔？"}, {"jp": "ところでみなさん！本物の化石を、自分の手で発掘したことってありますか？", "zh": "對了，各位！大家有沒有親手挖掘過真正的化石呢？"}, {"jp": "おっ、ある人もいるかな？じゃあ……", "zh": "喔！好像有人挖過耶？那麼……"}, {"jp": "何千万年も前の、本物の化石を自分の手で見つけられるとしたら……やってみたいですか！？", "zh": "如果可以親手找到幾千萬年前真正的化石……大家想不想試試看！？"}, {"jp": "おおー！やってみたいよね！", "zh": "喔～～！果然會想試試看對吧！"}, {"jp": "実はね、僕が今日みんなに会いに来たのには、ちゃんと理由があるんです。", "zh": "其實啊，我今天特地來見大家，是有一個重要原因的。"}, {"jp": "その話をする前に……みなさんは、ペンギンさんのこと、どれくらい知っていますか？", "zh": "不過在說那件事之前……大家對企鵝到底了解多少呢？"}, {"jp": "ペンギンさんが普段食べるご飯は何かな？住んでる場所はどこだろう？", "zh": "大家知道企鵝平常都吃什麼嗎？牠們住在哪裡呢？"}, {"jp": "みなさんはペンギンが生物のなかでどの分類に属するかご存知ですか？", "zh": "大家知道企鵝在生物的分類裡，屬於哪一類嗎？"}, {"jp": "知っている人いますか？", "zh": "有沒有人知道呢？"}, {"jp": "そう、鳥類！いわゆる鳥の仲間なんですね！", "zh": "沒錯！是鳥類！也就是說，企鵝其實就是鳥的一種喔！"}, {"jp": "ここで疑問に思うことがあるかもしれません。鳥なのになぜ飛べないのか…", "zh": "不過，大家可能會想：企鵝明明是鳥，為什麼卻不會飛呢？"}, {"jp": "実はペンギンさん、大昔は『飛べる鳥』だったと考えられています。", "zh": "其實，大家可能不知道，研究認為企鵝在很久很久以前，原本是『會飛的鳥』喔！"}, {"jp": "ペンギンの系統を遡ると、進化の過程で、海での生活に特化していき『飛べる鳥』から『海を潜れる鳥』、そして『海を泳ぐ鳥』へと変化していったわけです。", "zh": "追溯企鵝的演化歷程，可以發現牠們在演化的過程中，逐漸適應了海洋生活。從『會飛的鳥』，慢慢變成『能潛入海裡的鳥』，最後變成『能在海裡游泳的鳥』。就是這樣一路演化過來的。"}, {"jp": "さらに祖先を遡ると面白いことが見えてきたんです。", "zh": "而且，如果我們再繼續往前追溯牠們的祖先，還會發現一件很有趣的事情！"}, {"jp": "実はペンギンさんのふるーーい祖先は地上で生活する肉食恐竜の一種だったという研究結果もあるんですよ！", "zh": "有研究結果指出，企鵝非常非常久以前的祖先，可能是一種生活在陸地上的肉食性恐龍喔！"}, {"jp": "みなさんが知る有名な恐竜、『ティラノサウルス』！", "zh": "大家應該都知道一種很有名的恐龍吧？就是——暴龍！"}, {"jp": "ティラノサウルスも、鳥の祖先につながる恐竜たちも、獣脚類と呼ばれる恐竜で、その一部から進化して生き残ったのが『鳥類』なんです！", "zh": "暴龍，以及與鳥類祖先有關的恐龍，都屬於『獸腳類』這一類的恐龍。而鳥類，就是從其中一部分恐龍演化而來，一直延續到現在的喔！"}, {"jp": "つまり恐竜は全ていなくなってしまったと思われがちですが、その系統は、今も私たちの目の前で生きているんですね！", "zh": "所以，我們常常會覺得恐龍已經全部消失了，但其實，其中一部分恐龍演化成了鳥類，一直延續到今天，就生活在我們身邊喔！"}, {"jp": "でもみなさん、ちょっと不思議じゃないですか？", "zh": "不過，仔細想想，大家是不是也覺得有點不可思議呢？"}, {"jp": "ティラノサウルスが生きていたのは今から６６００万年以上も昔の話です。", "zh": "暴龍生活的年代，可是距離現在已經超過 6,600 萬年了。"}, {"jp": "もちろん実際に見た人も写真も映像も残っていません。それなのにどうして鳥と恐竜が繋がっているとわかったのでしょうか？", "zh": "當然，不可能有人親眼看過牠們，也沒有留下照片或影片。那麼，我們到底是怎麼知道鳥類和恐龍之間有關係的呢？"}, {"jp": "その謎を解く、大切な手がかりがあったからなんです！", "zh": "其實，是因為我們發現了一個解開這個謎團、非常重要的線索！"}, {"jp": "それが『化石』です。", "zh": "那就是——「化石」！"}, {"jp": "化石は生き物の骨や歯が土の中で長い時間をかけて石になったものです。だからこの化石にはたくさんの情報が詰まっているんですよ！", "zh": "化石，是生物的骨頭或牙齒等，在土壤中經過非常漫長的時間，逐漸變成像石頭一樣的東西。所以，化石裡其實藏著非常多的資訊喔！"}, {"jp": "昔の地球にその生き物が本当に生きていた証拠！なんだかワクワクしちゃいますよね！", "zh": "它就像是證明這些生物，真的曾經生活在古代地球上的重要證據！是不是覺得有點興奮呢？"}, {"jp": "地球では、海だった場所が陸になったり、環境が大きく変わったりしながら、とてつもなく長い時間が流れてきました。", "zh": "在地球漫長的歷史中，海洋可能變成陸地，陸地也可能再次變成海洋，地球上的環境一直不斷地變化。"}, {"jp": "そしてその長い歴史の中で、ここに化石としてみなさんのもとへやってきたということなんです！", "zh": "就這樣經過了非常非常漫長的時間，這些生物最後以「化石」的形式，來到了我們今天的世界。"}, {"jp": "では、もっともっと昔。恐竜が生きていた時代の海には、どんな生き物がいたのでしょう？", "zh": "那麼，再讓我們回到更久以前。在恐龍生活的那個時代，當時的海洋裡，又生活著哪些生物呢？"}, {"jp": "時代を遡ること、白亜紀。", "zh": "現在，讓我們把時間倒轉，回到——白堊紀！"}, {"jp": "実はこの時代、海の中にも巨大な生き物たちが暮らしていました。", "zh": "其實在這個時代，海洋裡也生活著許多巨大生物。"}, {"jp": "その代表が『モササウルス』です。", "zh": "其中最具代表性的，就是——滄龍！"}, {"jp": "大きな体と鋭い歯を持ち、白亜紀の海で暮らしていたトカゲの仲間なんです。", "zh": "牠們身形巨大、牙齒銳利，是生活在白堊紀海洋中的爬蟲類動物，和現在的蜥蜴有著親緣關係。"}, {"jp": "そして海に生息していたのは、巨大な生き物だけではありません。", "zh": "不過，當時生活在海裡的，可不只有這些巨大生物喔！"}, {"jp": "これはみなさんも見たことがあるかな？", "zh": "大家有沒有看過這個呢？"}, {"jp": "そう、これが『本物の』アンモナイトです！", "zh": "沒錯！這就是一顆貨真價實的菊石化石！"}, {"jp": "このように石に見えるこの貝、時代で言うと６６００万年も前に生息していた生き物なんですよ！", "zh": "這個看起來像石頭一樣的東西，其實是曾經生活在大約 6,600 萬年前的生物喔！"}, {"jp": "それが現代に化石として現れたんです！", "zh": "而經過漫長的時間之後，牠就以化石的樣子出現在我們現在的世界裡。"}, {"jp": "アンモナイトは貝の仲間！と思われがちですが、現在のイカやタコに近い仲間なんです！", "zh": "很多人可能會以為菊石是貝類的一種，但其實牠們和現在的魷魚、章魚比較接近喔！"}, {"jp": "モササウルス、古代ザメ、アンモナイト。今の水族館にいる生き物とは全く違う生き物が、昔の海には暮らしていたんです！", "zh": "滄龍、古代鯊魚、菊石……和現在水族館裡看到的生物不同，這些古老的生物，曾經生活在很久以前的海洋裡！"}, {"jp": "その秘密を紐解くのがこの化石だったんです！", "zh": "而解開這些謎團的重要線索，就是我們眼前的化石！"}, {"jp": "約7000万年前を生きた恐竜たちが長い年月をかけて、現代に姿を現しました。生きた証『化石』！その調査をすることで生き物と地球の不思議を知ることができるんです！", "zh": "大約 7,000 萬年前生活在地球上的恐龍們，經過漫長歲月，終於以不同的形式來到了現代。化石，就是牠們曾經活過的證明！透過研究化石，我們就能了解到生物以及地球的許多不可思議之處！"}, {"jp": "ところでみなさん！最初に僕が聞いた質問、覚えてますか？", "zh": "對了，各位！還記得我一開始問大家的問題嗎？"}, {"jp": "本物の化石を、自分の手で発掘してみたい人ー！？", "zh": "想要親手挖掘真正化石的人～～！？"}, {"jp": "おおー！やってみたいよね！", "zh": "喔～～！果然會想試試看對吧！"}, {"jp": "実は……できるんです！！", "zh": "其實……真的可以喔！！"}, {"jp": "この近くの発掘現場では、みなさん自身が発掘調査員になって、本物の化石を発掘することができます！", "zh": "就在這附近的發掘現場，大家可以親自化身為發掘調查員，挖掘真正的化石！"}, {"jp": "発掘できるのは……古代ザメの歯！そして――アンモナイトの化石！", "zh": "可以挖到的是……古代鯊魚的牙齒！還有——菊石化石！"}, {"jp": "どちらが出てくるのかは、発掘してからのお楽しみ！", "zh": "到底會挖到哪一種呢？要等挖開之後才知道喔！"}, {"jp": "しかも、自分で発掘した本物の化石は、そのまま持って帰ることができます！", "zh": "而且，自己親手挖出來的真正化石，可以直接帶回家喔！"}, {"jp": "体験時間は、およそ10分！料金は、1回2,000円です！", "zh": "體驗時間大約 10 分鐘！費用每次 2,000 日圓！"}, {"jp": "何千万年もの間、地球の中に残されてきた歴史のかけら。", "zh": "這是一塊在地球中沉睡了幾千萬年的歷史碎片。"}, {"jp": "今日ここで見るだけじゃなくて、今度は、みなさん自身の手で発掘してみませんか？", "zh": "今天不只是用眼睛看，接下來，要不要換大家親手把它挖出來呢？"}, {"jp": "やってみたい！という方は、このショーが終わったら、そのまま発掘現場へ！", "zh": "想試試看的人！這場表演結束後，就直接前往發掘現場吧！"}, {"jp": "あっ……！！", "zh": "啊……！！"}, {"jp": "僕も発掘現場に戻らないと、またリーダーに怒られる！！", "zh": "我也得趕快回發掘現場了，不然又要被隊長罵啦！！"}, {"jp": "それじゃあみんな――", "zh": "那麼大家——"}, {"jp": "発掘現場で会おうねー！！", "zh": "我們發掘現場見～～！！"}];
+const WORKER="https://aquarium-subtitle-sync.ryotanakatsuka-goo.workers.dev";
+let lastCue=-1, audioCtx=null, enabled=false;
+
+function kick(el,cls="go"){
+  el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls);
+  setTimeout(()=>el.classList.remove(cls),6000);
+}
+function shake(strong=false){
+  document.body.classList.remove("shake"); void document.body.offsetWidth; document.body.classList.add("shake");
+  if(navigator.vibrate) navigator.vibrate(strong?[130,70,180]:[90]);
+  setTimeout(()=>document.body.classList.remove("shake"),700);
+}
+function tone(freq=70,dur=.18,vol=.12){
+  if(!audioCtx) return;
+  const o=audioCtx.createOscillator(), g=audioCtx.createGain();
+  o.type="sine"; o.frequency.setValueAtTime(freq,audioCtx.currentTime);
+  o.frequency.exponentialRampToValueAtTime(Math.max(28,freq*.6),audioCtx.currentTime+dur);
+  g.gain.setValueAtTime(vol,audioCtx.currentTime); g.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+dur);
+  o.connect(g).connect(audioCtx.destination); o.start(); o.stop(audioCtx.currentTime+dur);
+}
+function footsteps(){
+  tone(52,.34,.16); shake();
+  setTimeout(()=>{tone(46,.38,.18);shake();},950);
+  setTimeout(()=>{tone(40,.45,.20);shake(true);},1900);
+}
+function effectForCue(i){
+  if(!enabled || i===lastCue) return;
+  lastCue=i;
+  // ティラノサウルス登場
+  if(i===21){ kick(document.getElementById("flash")); kick(document.getElementById("dino")); kick(document.getElementById("vignette")); footsteps(); }
+  // 6600万年前
+  if(i===25){ kick(document.getElementById("stamp")); tone(80,.5,.13); }
+  // 白亜紀へタイムトラベル
+  if(i===34){ kick(document.getElementById("flash")); kick(document.getElementById("stamp")); tone(120,.8,.10); }
+  // モササウルス
+  if(i===36){ kick(document.getElementById("water")); shake(); tone(58,.5,.15); }
+  // 本物のアンモナイト
+  if(i===40){ kick(document.getElementById("ammonite")); kick(document.getElementById("burst")); tone(210,.42,.07); }
+  // 実はできるんです
+  if(i===50){ kick(document.getElementById("burst")); shake(true); tone(95,.35,.14); }
+  // 化石2種
+  if(i===52){ kick(document.getElementById("ammonite")); tone(160,.25,.08); }
+  // 最終CTA
+  if(i===62){ kick(document.getElementById("burst")); tone(130,.25,.10); setTimeout(()=>tone(180,.3,.08),260); }
+}
+function renderCue(i){
+  i=Math.max(0,Math.min(cues.length-1,Number(i)||0));
+  const c=cues[i];
+  document.getElementById("zh").textContent=c.zh;
+  document.getElementById("jp").textContent=c.jp;
+  effectForCue(i);
+}
+async function loadState(){
+  try{const r=await fetch(WORKER+"/state",{cache:"no-store"});const d=await r.json();renderCue(d.cue);}catch(e){}
+}
+function connect(){
+ const status=document.getElementById("status");
+ const ws=new WebSocket(WORKER.replace("https://","wss://")+"/ws");
+ ws.onopen=()=>{status.textContent="LIVE";loadState();};
+ ws.onmessage=e=>{try{const d=JSON.parse(e.data);if("cue" in d)renderCue(d.cue)}catch{}};
+ ws.onclose=()=>{status.textContent="Reconnecting";setTimeout(connect,1200)};
+ ws.onerror=()=>ws.close();
+}
+document.getElementById("enableBtn").onclick=async()=>{
+  enabled=true;
+  try{audioCtx=new (window.AudioContext||window.webkitAudioContext)(); await audioCtx.resume();}catch(e){}
+  document.getElementById("enable").style.display="none";
+  loadState();
+};
+connect();
+</script>
+</body>
+</html>
