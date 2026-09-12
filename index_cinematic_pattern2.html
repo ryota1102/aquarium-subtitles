@@ -1,0 +1,102 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>企鵝 × 化石｜Cinematic Subtitle</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Hiragino Sans","Yu Gothic",sans-serif;background:#07131d;color:#fff}
+#world{position:fixed;inset:0;overflow:hidden;background:#07131d;transition:background 1s ease}
+#bg,#bg2,#particles,#creature,#overlay{position:absolute;inset:-4%;transition:opacity .9s ease,transform 1.6s cubic-bezier(.2,.8,.2,1);pointer-events:none}
+#bg{background-size:cover;background-position:center;transform:scale(1.04)}
+#bg2{opacity:.45}
+#overlay{inset:0;background:linear-gradient(180deg,rgba(1,8,13,.12),rgba(1,8,13,.22) 45%,rgba(1,8,13,.74));z-index:3}
+#particles{z-index:2;opacity:.5;background-image:radial-gradient(circle,rgba(255,255,255,.7) 0 1px,transparent 1.5px);background-size:34px 34px;animation:drift 18s linear infinite}
+@keyframes drift{to{transform:translate3d(-34px,-68px,0)}}
+#creature{z-index:2;display:grid;place-items:center;opacity:.85}
+#creature svg{width:min(92vw,920px);height:auto;filter:drop-shadow(0 30px 35px rgba(0,0,0,.55));transition:all 1s ease}
+.shell{position:relative;z-index:5;height:100svh;display:flex;flex-direction:column;padding:max(16px,env(safe-area-inset-top)) 18px max(16px,env(safe-area-inset-bottom))}
+.top{display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:.1em;color:rgba(255,255,255,.68)}
+.brand{font-weight:900;color:#e3bd72}.live{display:flex;align-items:center;gap:7px}.dot{width:7px;height:7px;background:#73e08c;border-radius:50%;box-shadow:0 0 12px #73e08c}
+.copy{margin-top:auto;margin-bottom:clamp(24px,7vh,76px);padding:22px 18px 18px;text-align:center;transition:all .55s ease}
+.sceneLabel{font-size:10px;letter-spacing:.22em;font-weight:900;color:#e3bd72;margin-bottom:12px;text-shadow:0 2px 10px #000}
+#zh{font-size:clamp(30px,7vw,72px);line-height:1.32;font-weight:900;text-shadow:0 5px 30px #000,0 2px 8px #000;text-wrap:balance;transition:all .35s ease}
+#jp{font-size:clamp(13px,2.2vw,23px);line-height:1.55;font-weight:650;color:rgba(255,255,255,.78);margin-top:14px;text-shadow:0 3px 16px #000;text-wrap:balance;transition:all .35s ease}
+.progress{height:2px;background:rgba(255,255,255,.14);position:absolute;left:18px;right:18px;bottom:10px}.progress i{display:block;height:100%;background:#e3bd72;transition:width .4s ease}
+
+/* Scene worlds */
+.welcome #bg{background:radial-gradient(circle at 50% 10%,#2d8fb0 0,#0b536e 34%,#062534 68%,#04151f 100%)}
+.welcome #bg2{background:radial-gradient(ellipse at 50% 110%,rgba(115,218,240,.45),transparent 50%)}
+.excavation #bg{background:radial-gradient(circle at 35% 30%,#70562d 0,#382d1e 34%,#171d1e 72%,#071319)}
+.excavation #bg2{background:repeating-linear-gradient(12deg,transparent 0 46px,rgba(221,181,106,.08) 47px 49px)}
+.penguin #bg{background:linear-gradient(165deg,#82cde1 0,#1b6d8c 38%,#063148 72%,#071b29)}
+.penguin #bg2{background:radial-gradient(ellipse at 50% 115%,rgba(219,250,255,.35),transparent 52%)}
+.oceanbird #bg{background:linear-gradient(#a4dce8 0,#287b9c 34%,#0b405e 50%,#052537 100%)}
+.dinosaur #bg{background:radial-gradient(circle at 65% 12%,#9d8645 0,#345c42 27%,#15362d 54%,#071c1d 100%)}
+.dinosaur #particles{opacity:.25}
+.fossil #bg{background:radial-gradient(circle at 50% 45%,#806640 0,#3c3022 38%,#171b1c 72%,#071318)}
+.fossil #bg2{background:repeating-radial-gradient(ellipse at 50% 120%,transparent 0 45px,rgba(230,194,120,.09) 46px 48px)}
+.earth #bg{background:linear-gradient(180deg,#326d85,#183e51 35%,#6a5a3b 36%,#302a20 68%,#101719)}
+.cretaceous_sea #bg{background:radial-gradient(circle at 50% -10%,#4cb1c8,#11617d 34%,#07354d 62%,#031a28 100%)}
+.cretaceous_sea #bg2{background:repeating-radial-gradient(ellipse at 50% 110%,rgba(113,218,235,.18) 0 2px,transparent 3px 34px);animation:water 8s linear infinite}
+@keyframes water{to{transform:scale(1.18) translateY(-4%)}}
+.ammonite #bg{background:radial-gradient(circle at 50% 45%,#365d60 0,#173c49 38%,#071f30 72%,#06141d)}
+.ammonite #bg2{background:radial-gradient(circle at 20% 20%,rgba(215,180,111,.24),transparent 24%),radial-gradient(circle at 80% 62%,rgba(215,180,111,.18),transparent 28%)}
+.fossil_gold #bg{background:radial-gradient(circle at 50% 42%,#7c6235 0,#3d3020 38%,#14191b 75%)}
+.excavation_cta #bg{background:radial-gradient(circle at 50% 30%,#9a7536 0,#4d3920 32%,#182122 68%,#07151b)}
+.history #bg{background:linear-gradient(160deg,#244d5b,#172f39 45%,#5a4930 100%)}
+.finale #bg{background:radial-gradient(circle at 50% 35%,#b17d2d 0,#4f3822 34%,#13272c 70%,#06151d)}
+/* creature illustrations */
+.dinosaur #creature svg,.cretaceous_sea #creature svg,.ammonite #creature svg,.penguin #creature svg{opacity:1}
+.fx-pop #zh{transform:scale(1.08);color:#ffe2a1}
+.fx-left .copy{text-align:left;max-width:760px}
+.fx-dark #overlay{background:rgba(0,0,0,.58)}
+.fx-flash{animation:screenflash .75s ease}
+@keyframes screenflash{0%{filter:brightness(2.5)}100%{filter:brightness(1)}}
+.fx-shake{animation:shake .55s linear}
+@keyframes shake{0%,100%{transform:none}20%{transform:translate(-9px,4px)}40%{transform:translate(8px,-5px)}60%{transform:translate(-6px,-3px)}80%{transform:translate(5px,4px)}}
+#tap{position:fixed;inset:0;z-index:30;background:linear-gradient(160deg,#071723,#0b3345);display:grid;place-items:center;text-align:center;padding:28px}
+#tap button{border:1px solid rgba(227,189,114,.55);background:rgba(4,20,29,.7);color:#fff;padding:20px 28px;border-radius:22px;font-size:18px;font-weight:900;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+#tap small{display:block;margin-top:7px;color:#bcd3dc;font-weight:500}
+</style></head><body>
+<div id="tap"><button id="start">演出字幕を開始<small>字幕・画面演出をリアルタイム同期</small></button></div>
+<div id="world" class="welcome"><div id="bg"></div><div id="bg2"></div><div id="particles"></div><div id="creature"></div><div id="overlay"></div></div>
+<div class="shell"><div class="top"><div class="brand">DMM KARIYUSHI AQUARIUM</div><div class="live"><span class="dot"></span><span id="status">CONNECTING</span></div></div>
+<div class="copy"><div class="sceneLabel" id="label">PENGUIN × FOSSIL EXPLORATION</div><div id="zh">連線中…</div><div id="jp">接続しています…</div></div>
+<div class="progress"><i id="bar"></i></div></div>
+<script>
+const cues=[{"jp": "みなさーん！こんにちは！", "zh": "大家～～好！"}, {"jp": "まもなくこちら『うみかじドーム前』にてペンギンの解説イベントが始まります！ぜひこちらまでお集まりください！", "zh": "再過幾分鐘，企鵝解說活動就要開始囉！活動就在前面的『海風圓頂劇場（Umikaji Dome）』舉行，歡迎大家一起過來看看！"}, {"jp": "本日はDMMかりゆし水族館にお越しいただき誠にありがとうございます。調査員です。よろしくお願いします！", "zh": "今天非常感謝大家來到 DMM Kariyushi 水族館！我是調查員，請大家多多指教！"}, {"jp": "実は僕……さっきまで発掘現場で調査してたんですけど……", "zh": "其實我啊……剛剛都還在發掘現場進行調查……"}, {"jp": "みんなとお話ししたくて、こっそり抜け出してきちゃいました！", "zh": "可是我太想跟大家聊聊天了，所以就偷偷溜出來啦！"}, {"jp": "リーダーには……内緒にしてくださいね？", "zh": "這件事……要幫我對隊長保密喔？"}, {"jp": "ところでみなさん！本物の化石を、自分の手で発掘したことってありますか？", "zh": "對了，各位！大家有沒有親手挖掘過真正的化石呢？"}, {"jp": "おっ、ある人もいるかな？じゃあ……", "zh": "喔！好像有人挖過耶？那麼……"}, {"jp": "何千万年も前の、本物の化石を自分の手で見つけられるとしたら……やってみたいですか！？", "zh": "如果可以親手找到幾千萬年前真正的化石……大家想不想試試看！？"}, {"jp": "おおー！やってみたいよね！", "zh": "喔～～！果然會想試試看對吧！"}, {"jp": "実はね、僕が今日みんなに会いに来たのには、ちゃんと理由があるんです。", "zh": "其實啊，我今天特地來見大家，是有一個重要原因的。"}, {"jp": "その話をする前に……みなさんは、ペンギンさんのこと、どれくらい知っていますか？", "zh": "不過在說那件事之前……大家對企鵝到底了解多少呢？"}, {"jp": "ペンギンさんが普段食べるご飯は何かな？住んでる場所はどこだろう？", "zh": "大家知道企鵝平常都吃什麼嗎？牠們住在哪裡呢？"}, {"jp": "みなさんはペンギンが生物のなかでどの分類に属するかご存知ですか？", "zh": "大家知道企鵝在生物的分類裡，屬於哪一類嗎？"}, {"jp": "知っている人いますか？", "zh": "有沒有人知道呢？"}, {"jp": "そう、鳥類！いわゆる鳥の仲間なんですね！", "zh": "沒錯！是鳥類！也就是說，企鵝其實就是鳥的一種喔！"}, {"jp": "ここで疑問に思うことがあるかもしれません。鳥なのになぜ飛べないのか…", "zh": "不過，大家可能會想：企鵝明明是鳥，為什麼卻不會飛呢？"}, {"jp": "実はペンギンさん、大昔は『飛べる鳥』だったと考えられています。", "zh": "其實，大家可能不知道，研究認為企鵝在很久很久以前，原本是『會飛的鳥』喔！"}, {"jp": "ペンギンの系統を遡ると、進化の過程で、海での生活に特化していき『飛べる鳥』から『海を潜れる鳥』、そして『海を泳ぐ鳥』へと変化していったわけです。", "zh": "追溯企鵝的演化歷程，可以發現牠們在演化的過程中，逐漸適應了海洋生活。從『會飛的鳥』，慢慢變成『能潛入海裡的鳥』，最後變成『能在海裡游泳的鳥』。就是這樣一路演化過來的。"}, {"jp": "さらに祖先を遡ると面白いことが見えてきたんです。", "zh": "而且，如果我們再繼續往前追溯牠們的祖先，還會發現一件很有趣的事情！"}, {"jp": "実はペンギンさんのふるーーい祖先は地上で生活する肉食恐竜の一種だったという研究結果もあるんですよ！", "zh": "有研究結果指出，企鵝非常非常久以前的祖先，可能是一種生活在陸地上的肉食性恐龍喔！"}, {"jp": "みなさんが知る有名な恐竜、『ティラノサウルス』！", "zh": "大家應該都知道一種很有名的恐龍吧？就是——暴龍！"}, {"jp": "ティラノサウルスも、鳥の祖先につながる恐竜たちも、獣脚類と呼ばれる恐竜で、その一部から進化して生き残ったのが『鳥類』なんです！", "zh": "暴龍，以及與鳥類祖先有關的恐龍，都屬於『獸腳類』這一類的恐龍。而鳥類，就是從其中一部分恐龍演化而來，一直延續到現在的喔！"}, {"jp": "つまり恐竜は全ていなくなってしまったと思われがちですが、その系統は、今も私たちの目の前で生きているんですね！", "zh": "所以，我們常常會覺得恐龍已經全部消失了，但其實，其中一部分恐龍演化成了鳥類，一直延續到今天，就生活在我們身邊喔！"}, {"jp": "でもみなさん、ちょっと不思議じゃないですか？", "zh": "不過，仔細想想，大家是不是也覺得有點不可思議呢？"}, {"jp": "ティラノサウルスが生きていたのは今から６６００万年以上も昔の話です。", "zh": "暴龍生活的年代，可是距離現在已經超過 6,600 萬年了。"}, {"jp": "もちろん実際に見た人も写真も映像も残っていません。それなのにどうして鳥と恐竜が繋がっているとわかったのでしょうか？", "zh": "當然，不可能有人親眼看過牠們，也沒有留下照片或影片。那麼，我們到底是怎麼知道鳥類和恐龍之間有關係的呢？"}, {"jp": "その謎を解く、大切な手がかりがあったからなんです！", "zh": "其實，是因為我們發現了一個解開這個謎團、非常重要的線索！"}, {"jp": "それが『化石』です。", "zh": "那就是——「化石」！"}, {"jp": "化石は生き物の骨や歯が土の中で長い時間をかけて石になったものです。だからこの化石にはたくさんの情報が詰まっているんですよ！", "zh": "化石，是生物的骨頭或牙齒等，在土壤中經過非常漫長的時間，逐漸變成像石頭一樣的東西。所以，化石裡其實藏著非常多的資訊喔！"}, {"jp": "昔の地球にその生き物が本当に生きていた証拠！なんだかワクワクしちゃいますよね！", "zh": "它就像是證明這些生物，真的曾經生活在古代地球上的重要證據！是不是覺得有點興奮呢？"}, {"jp": "地球では、海だった場所が陸になったり、環境が大きく変わったりしながら、とてつもなく長い時間が流れてきました。", "zh": "在地球漫長的歷史中，海洋可能變成陸地，陸地也可能再次變成海洋，地球上的環境一直不斷地變化。"}, {"jp": "そしてその長い歴史の中で、ここに化石としてみなさんのもとへやってきたということなんです！", "zh": "就這樣經過了非常非常漫長的時間，這些生物最後以「化石」的形式，來到了我們今天的世界。"}, {"jp": "では、もっともっと昔。恐竜が生きていた時代の海には、どんな生き物がいたのでしょう？", "zh": "那麼，再讓我們回到更久以前。在恐龍生活的那個時代，當時的海洋裡，又生活著哪些生物呢？"}, {"jp": "時代を遡ること、白亜紀。", "zh": "現在，讓我們把時間倒轉，回到——白堊紀！"}, {"jp": "実はこの時代、海の中にも巨大な生き物たちが暮らしていました。", "zh": "其實在這個時代，海洋裡也生活著許多巨大生物。"}, {"jp": "その代表が『モササウルス』です。", "zh": "其中最具代表性的，就是——滄龍！"}, {"jp": "大きな体と鋭い歯を持ち、白亜紀の海で暮らしていたトカゲの仲間なんです。", "zh": "牠們身形巨大、牙齒銳利，是生活在白堊紀海洋中的爬蟲類動物，和現在的蜥蜴有著親緣關係。"}, {"jp": "そして海に生息していたのは、巨大な生き物だけではありません。", "zh": "不過，當時生活在海裡的，可不只有這些巨大生物喔！"}, {"jp": "これはみなさんも見たことがあるかな？", "zh": "大家有沒有看過這個呢？"}, {"jp": "そう、これが『本物の』アンモナイトです！", "zh": "沒錯！這就是一顆貨真價實的菊石化石！"}, {"jp": "このように石に見えるこの貝、時代で言うと６６００万年も前に生息していた生き物なんですよ！", "zh": "這個看起來像石頭一樣的東西，其實是曾經生活在大約 6,600 萬年前的生物喔！"}, {"jp": "それが現代に化石として現れたんです！", "zh": "而經過漫長的時間之後，牠就以化石的樣子出現在我們現在的世界裡。"}, {"jp": "アンモナイトは貝の仲間！と思われがちですが、現在のイカやタコに近い仲間なんです！", "zh": "很多人可能會以為菊石是貝類的一種，但其實牠們和現在的魷魚、章魚比較接近喔！"}, {"jp": "モササウルス、古代ザメ、アンモナイト。今の水族館にいる生き物とは全く違う生き物が、昔の海には暮らしていたんです！", "zh": "滄龍、古代鯊魚、菊石……和現在水族館裡看到的生物不同，這些古老的生物，曾經生活在很久以前的海洋裡！"}, {"jp": "その秘密を紐解くのがこの化石だったんです！", "zh": "而解開這些謎團的重要線索，就是我們眼前的化石！"}, {"jp": "約7000万年前を生きた恐竜たちが長い年月をかけて、現代に姿を現しました。生きた証『化石』！その調査をすることで生き物と地球の不思議を知ることができるんです！", "zh": "大約 7,000 萬年前生活在地球上的恐龍們，經過漫長歲月，終於以不同的形式來到了現代。化石，就是牠們曾經活過的證明！透過研究化石，我們就能了解到生物以及地球的許多不可思議之處！"}, {"jp": "ところでみなさん！最初に僕が聞いた質問、覚えてますか？", "zh": "對了，各位！還記得我一開始問大家的問題嗎？"}, {"jp": "本物の化石を、自分の手で発掘してみたい人ー！？", "zh": "想要親手挖掘真正化石的人～～！？"}, {"jp": "おおー！やってみたいよね！", "zh": "喔～～！果然會想試試看對吧！"}, {"jp": "実は……できるんです！！", "zh": "其實……真的可以喔！！"}, {"jp": "この近くの発掘現場では、みなさん自身が発掘調査員になって、本物の化石を発掘することができます！", "zh": "就在這附近的發掘現場，大家可以親自化身為發掘調查員，挖掘真正的化石！"}, {"jp": "発掘できるのは……古代ザメの歯！そして――アンモナイトの化石！", "zh": "可以挖到的是……古代鯊魚的牙齒！還有——菊石化石！"}, {"jp": "どちらが出てくるのかは、発掘してからのお楽しみ！", "zh": "到底會挖到哪一種呢？要等挖開之後才知道喔！"}, {"jp": "しかも、自分で発掘した本物の化石は、そのまま持って帰ることができます！", "zh": "而且，自己親手挖出來的真正化石，可以直接帶回家喔！"}, {"jp": "体験時間は、およそ10分！料金は、1回2,000円です！", "zh": "體驗時間大約 10 分鐘！費用每次 2,000 日圓！"}, {"jp": "何千万年もの間、地球の中に残されてきた歴史のかけら。", "zh": "這是一塊在地球中沉睡了幾千萬年的歷史碎片。"}, {"jp": "今日ここで見るだけじゃなくて、今度は、みなさん自身の手で発掘してみませんか？", "zh": "今天不只是用眼睛看，接下來，要不要換大家親手把它挖出來呢？"}, {"jp": "やってみたい！という方は、このショーが終わったら、そのまま発掘現場へ！", "zh": "想試試看的人！這場表演結束後，就直接前往發掘現場吧！"}, {"jp": "あっ……！！", "zh": "啊……！！"}, {"jp": "僕も発掘現場に戻らないと、またリーダーに怒られる！！", "zh": "我也得趕快回發掘現場了，不然又要被隊長罵啦！！"}, {"jp": "それじゃあみんな――", "zh": "那麼大家——"}, {"jp": "発掘現場で会おうねー！！", "zh": "我們發掘現場見～～！！"}];
+const sceneMap={"0": "welcome", "1": "welcome", "2": "welcome", "3": "excavation", "4": "excavation", "5": "excavation", "6": "excavation", "7": "excavation", "8": "excavation", "9": "excavation", "10": "excavation", "11": "penguin", "12": "penguin", "13": "penguin", "14": "penguin", "15": "penguin", "16": "penguin", "17": "oceanbird", "18": "oceanbird", "19": "oceanbird", "20": "dinosaur", "21": "dinosaur", "22": "dinosaur", "23": "dinosaur", "24": "fossil", "25": "fossil", "26": "fossil", "27": "fossil", "28": "fossil", "29": "fossil", "30": "fossil", "31": "earth", "32": "earth", "33": "earth", "34": "cretaceous_sea", "35": "cretaceous_sea", "36": "cretaceous_sea", "37": "cretaceous_sea", "38": "cretaceous_sea", "39": "ammonite", "40": "ammonite", "41": "ammonite", "42": "ammonite", "43": "ammonite", "44": "ammonite", "45": "ammonite", "46": "fossil_gold", "47": "fossil_gold", "48": "fossil_gold", "49": "fossil_gold", "50": "excavation_cta", "51": "excavation_cta", "52": "excavation_cta", "53": "excavation_cta", "54": "excavation_cta", "55": "excavation_cta", "56": "history", "57": "history", "58": "history", "59": "finale", "60": "finale", "61": "finale", "62": "finale"};
+const specials={"5": "secret", "8": "question", "15": "bird", "20": "dino_reveal", "21": "trex", "25": "time", "28": "fossil_word", "30": "proof", "34": "timewarp", "36": "mosasaurus", "40": "ammonite_reveal", "43": "squid", "44": "sea_creatures", "50": "can_do", "52": "two_fossils", "54": "takehome", "55": "price", "59": "oops", "62": "final"};
+const WORKER="https://aquarium-subtitle-sync.ryotanakatsuka-goo.workers.dev";
+let started=false,last=-1,audio=null;
+
+const SVG={
+penguin:`<svg viewBox="0 0 900 600"><g opacity=".28" fill="#dff8ff"><ellipse cx="650" cy="340" rx="115" ry="190"/><ellipse cx="650" cy="210" rx="78" ry="72"/><path d="M575 330 470 420l118-34zm150 0 105 90-118-34z"/><ellipse cx="650" cy="355" rx="72" ry="125" fill="#fff"/></g></svg>`,
+dinosaur:`<svg viewBox="0 0 1000 600"><path opacity=".52" fill="#020b0d" d="M930 270c-55-28-127-29-207-8-92-79-197-118-310-94-103 22-165 91-195 171L73 392l168-17c61 55 153 79 255 57l91 87 1-118c55-36 89-87 108-143 84 4 165-18 234-88z"/><circle cx="835" cy="260" r="8" fill="#e1bd72"/></svg>`,
+cretaceous_sea:`<svg viewBox="0 0 1000 600"><path opacity=".34" fill="#04151d" d="M85 360c160-130 324-154 483-78 73-50 156-74 256-56l-93 64 105 58-132 8c-63 83-170 120-301 91-127-29-229-42-318-87z"/><path opacity=".3" fill="#b7edf2" d="M415 348c105-46 207-54 305-22-87 13-167 48-239 103z"/></svg>`,
+ammonite:`<svg viewBox="0 0 900 600"><g transform="translate(450 300)" fill="none" stroke="#d8b56e" opacity=".55"><circle r="190" stroke-width="16"/><circle r="135" stroke-width="14"/><circle r="82" stroke-width="12"/><circle r="36" stroke-width="10"/><path d="M0-190 0-135M135 0 82 0M0 135 0 82M-135 0-82 0" stroke-width="7"/></g></svg>`,
+excavation:`<svg viewBox="0 0 900 600"><g opacity=".22" stroke="#e2bd73" stroke-width="18" fill="none"><path d="m160 470 220-260m-110 20 190 160"/><path d="m690 470-220-260m110 20-190 160"/></g></svg>`
+};
+
+function labelFor(s){return ({welcome:"WELCOME",excavation:"EXCAVATION SITE",penguin:"PENGUIN",oceanbird:"EVOLUTION",dinosaur:"DINOSAUR AGE",fossil:"FOSSIL EVIDENCE",earth:"EARTH HISTORY",cretaceous_sea:"CRETACEOUS SEA",ammonite:"AMMONITE",fossil_gold:"FOSSIL STORY",excavation_cta:"FOSSIL EXCAVATION",history:"70 MILLION YEARS",finale:"SEE YOU AT THE DIG SITE"})[s]||"PENGUIN × FOSSIL";}
+function setCreature(s){document.getElementById("creature").innerHTML=SVG[s]||SVG[s==="oceanbird"?"penguin":s==="excavation_cta"?"excavation":""]||""}
+function boom(freq=55,d=.32){if(!audio)return;let o=audio.createOscillator(),g=audio.createGain();o.type="sine";o.frequency.setValueAtTime(freq,audio.currentTime);o.frequency.exponentialRampToValueAtTime(28,audio.currentTime+d);g.gain.setValueAtTime(.12,audio.currentTime);g.gain.exponentialRampToValueAtTime(.001,audio.currentTime+d);o.connect(g).connect(audio.destination);o.start();o.stop(audio.currentTime+d)}
+function transient(cls){let w=document.getElementById("world");w.classList.remove(cls);void w.offsetWidth;w.classList.add(cls);setTimeout(()=>w.classList.remove(cls),1000)}
+function specialFX(i){
+ let s=specials[i]; let w=document.getElementById("world"); w.classList.remove("fx-pop","fx-left","fx-dark");
+ if(!s)return;
+ if(["question","fossil_word","proof","can_do","price","final"].includes(s))w.classList.add("fx-pop");
+ if(["trex","timewarp","mosasaurus","ammonite_reveal","can_do","final"].includes(s)){transient("fx-flash");boom(s==="trex"?42:72,.38)}
+ if(["trex","mosasaurus","oops"].includes(s)){transient("fx-shake");if(navigator.vibrate)navigator.vibrate([100,60,120])}
+ if(s==="secret")w.classList.add("fx-dark");
+}
+function render(i){
+ i=Math.max(0,Math.min(cues.length-1,Number(i)||0)); let c=cues[i],sc=sceneMap[i]||"welcome",w=document.getElementById("world");
+ document.getElementById("zh").textContent=c.zh;document.getElementById("jp").textContent=c.jp;
+ document.getElementById("label").textContent=labelFor(sc);document.getElementById("bar").style.width=((i+1)/cues.length*100)+"%";
+ if(!w.classList.contains(sc)){w.className=sc;setCreature(sc);document.getElementById("bg").style.transform="scale(1.08)";setTimeout(()=>document.getElementById("bg").style.transform="scale(1.04)",60)}
+ if(started&&i!==last)specialFX(i); last=i;
+}
+async function state(){try{let r=await fetch(WORKER+"/state",{cache:"no-store"}),d=await r.json();render(d.cue)}catch(e){}}
+function connect(){let st=document.getElementById("status"),ws=new WebSocket(WORKER.replace("https://","wss://")+"/ws");ws.onopen=()=>{st.textContent="LIVE";state()};ws.onmessage=e=>{try{let d=JSON.parse(e.data);if("cue"in d)render(d.cue)}catch(_){}};ws.onclose=()=>{st.textContent="RECONNECTING";setTimeout(connect,1200)};ws.onerror=()=>ws.close()}
+document.getElementById("start").onclick=async()=>{started=true;try{audio=new(window.AudioContext||window.webkitAudioContext)();await audio.resume()}catch(e){}document.getElementById("tap").style.display="none";state()};
+connect();
+</script></body></html>
